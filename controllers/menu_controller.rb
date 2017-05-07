@@ -9,6 +9,7 @@ class MenuController
 
   def main_menu
     puts "Main Menu - #{address_book.entries.count} entries"
+    puts "0 - View entry number n"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
@@ -18,6 +19,10 @@ class MenuController
 
     selection = gets.to_i
     case selection
+      when 0
+        system "clear"
+        view_entry
+        main_menu
       when 1
         system "clear"
         view_all_entries
@@ -41,6 +46,23 @@ class MenuController
         system "clear"
         puts "Sorry, that is not a valid input"
         main_menu
+    end
+  end
+
+  def view_entry
+    system "clear"
+    print "Enter entry number you wish to view: "
+    entry_number = gets.chomp
+    puts "Entry number is #{entry_number}"
+
+    if (entry_number.to_i) <= address_book.entries.count && (entry_number.to_i) != 0
+      system "clear"
+      puts address_book.entries.at(entry_number.to_i - 1).to_s
+    else
+      puts "#{entry_number} is not a valid input"
+      puts "Hit any key to re-enter"
+      key = gets
+      view_entry if key
     end
   end
 
