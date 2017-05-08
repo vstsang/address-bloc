@@ -53,6 +53,14 @@ class AddressBook
     return nil
   end
 
+  def iterative_search(name)
+    entries.each do |entry|
+      return entry if name == entry.name
+    end
+
+    return nil
+  end
+
 =begin assignment exercise
   def remove_entry(name, phone_number, email)
     index = 0
